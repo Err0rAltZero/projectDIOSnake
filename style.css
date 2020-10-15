@@ -1,0 +1,9 @@
+body{
+    height: 95vh; /*Parte que fica a vista no documento*/
+    width: 95vh;
+    display: flex;
+    justify-content: center; /*Alinhar horizontalmente*/
+    align-items: center; /*Alinhar verticalmente*/
+    flex-direction: column; /*Elementos em coluna*/
+    color:rgb(56, 90, 0);
+}
