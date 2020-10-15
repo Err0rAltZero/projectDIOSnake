@@ -1,6 +1,8 @@
 let canvas=document.getElementById("snake");
 let context=canvas.getContext("2d");
 let box=32;
+let score=0;
+let scorebox=document.getElementById("score");
 let snake=[];
 snake[0]={
     x:8*box,
@@ -13,13 +15,17 @@ let food={
     y:Math.floor(Math.random()*15+1)*box
 }
 function criarBG(){
-    context.fillStyle="lightgreen";
+    context.fillStyle="palegreen";
     context.fillRect(0,0,16*box,16*box); //Desenha o retângulo do jogo
 }
 function criarCobrinha(){
     for(i=0;i<snake.length;i++){
         context.fillStyle="darkgreen";
+        context.fillRect(snake[0].x,snake[0].y, box,box);
+        if(i>0){
+        context.fillStyle="green";
         context.fillRect(snake[i].x,snake[i].y, box,box);
+        }
     }
 }
 function drawFood(){
@@ -43,7 +49,8 @@ function iniciarJogo(){
     for(i=1;i<snake.length;i++){
         if(snake[0].x==snake[i].x&&snake[0].y==snake[i].y){
             clearInterval(jogo);
-            alert('Game Over ^u^');
+            gameOver();
+            return            
         }
     }
     criarBG();
@@ -61,6 +68,8 @@ function iniciarJogo(){
     else{
         food.x=Math.floor(Math.random()*15+1)*box;
         food.y=Math.floor(Math.random()*15+1)*box;
+        score++;
+        scorebox.textContent=score;
     }    
     let newHead={
         x:snakeX,
@@ -70,4 +79,39 @@ function iniciarJogo(){
 }
 criarBG();
 criarCobrinha();
-let jogo=setInterval(iniciarJogo,200);
+let jogo=setInterval(iniciarJogo,100);
+function gameOver(){
+    var h1ti=document.getElementById("h1ti");
+    h1ti.style.color="red";
+    h1ti.textContent="GAME OVER!"
+    scorebox.style.border="2px solid red";
+    scorebox.style.color="red";
+    document.body.style.backgroundColor="lime";
+    context.fillStyle="black";
+    //Inicio Desenho
+    context.fillRect(0,0,16*box,16*box); //Desenha o retângulo do jogo
+    //Desenho da sad face
+    context.fillStyle="lime";    
+    context.fillRect(5*box,4*box,box,box);
+    context.fillRect(6*box,4*box,box,box);
+    context.fillRect(9*box,4*box,box,box);
+    context.fillRect(10*box,4*box,box,box);
+    context.fillRect(4*box,5*box,box,box);
+    context.fillRect(5*box,5*box,box,box);
+    context.fillRect(10*box,5*box,box,box);
+    context.fillRect(11*box,5*box,box,box);
+    context.fillRect(4*box,6*box,box,box);
+    context.fillRect(11*box,6*box,box,box);
+    context.fillRect(6*box,8*box,box,box);
+    context.fillRect(7*box,8*box,box,box);
+    context.fillRect(8*box,8*box,box,box);
+    context.fillRect(9*box,8*box,box,box);
+    context.fillRect(5*box,9*box,box,box);
+    context.fillRect(10*box,9*box,box,box);
+    context.fillRect(4*box,10*box,box,box);
+    context.fillRect(11*box,10*box,box,box);
+    context.fillRect(4*box,11*box,box,box);
+    context.fillRect(11*box,11*box,box,box);
+    //Fim do desenho
+    alert('Game Over :(');    
+}

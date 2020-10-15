@@ -6,4 +6,10 @@ body{
     align-items: center; /*Alinhar verticalmente*/
     flex-direction: column; /*Elementos em coluna*/
     color:rgb(56, 90, 0);
+    background-color: black;
+}
+div{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid green;
 }
